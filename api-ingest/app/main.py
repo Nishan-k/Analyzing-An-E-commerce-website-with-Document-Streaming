@@ -37,18 +37,19 @@ async def post_invoice_item(item:InvoiceItem):
     print("New invoice recieved !!")
     try:
         # Change the date format from d/m/y to d:m:y
-        date = datetime.strptime(item.InvoiceDate, "%d/%m/%y %H:%M")
-        print(f"Old date format: {date}")
+        
+        date = datetime.strptime(item.InvoiceDate, "%d/%m/%Y %H:%M")
+        print(date)
 
-        item.InvoiceDate = date.strftime("%d-%m-%y %H:%M:%S")
-        print(f"The new date time format is: {item.InvoiceDate}")
+        item.InvoiceDate = date.strftime("%d-%m-%Y %H:%M")
+
 
         # Change the format of the data from string to json:
         json_invoice = jsonable_encoder(item)
 
         # Change the json into string for kafka:
         json_invoice_string = json.dumps(json_invoice)
-
+        print(item)
         return JSONResponse(content=json_invoice, status_code=201)
     except ValueError:
         return JSONResponse(content=jsonable_encoder(item), status_code=400)
