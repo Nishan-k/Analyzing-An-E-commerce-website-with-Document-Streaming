@@ -7,7 +7,7 @@ import json
 from pydantic import BaseModel
 from datetime import datetime
 
-from kafka import KafkaProducer, producer
+from kafka import KafkaProducer
 
 # TODO:1 Create a schema for the incoming data:
 class InvoiceItem(BaseModel):
@@ -62,7 +62,7 @@ async def post_invoice_item(item:InvoiceItem):
 
 def producer_kafka_string(json_invoice_string):
     # Create a producer:
-    producer = KafkaProducer(bootstrap_servers='localhost:9093', acks=1)
+    producer = KafkaProducer(bootstrap_servers='kafka:9092', acks=1)
 
     # Now, write the json_invoice_string as byte to the topic created: ingestion-topic:
     producer.send('ingestion-topic', bytes(json_invoice_string, 'utf-8'))
