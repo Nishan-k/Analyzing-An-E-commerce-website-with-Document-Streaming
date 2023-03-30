@@ -1,11 +1,15 @@
 import pandas as pd
-import json
+
 import numpy as np
 
 
 
 # TODO:1 Read the CSV file:
+<<<<<<< HEAD:client/transformer.py
+df = pd.read_csv("./data/test.csv", encoding='ISO-8859-1')
+=======
 df = pd.read_csv("./data/test.csv")
+>>>>>>> parent of e79e96f (changes):data/transformer.py
 
 # TODO:2 Add a new column in the existing DF for the JSON representation of all the CSV file per record:
 df['json'] = df.to_json(orient='records', lines=True).splitlines()
