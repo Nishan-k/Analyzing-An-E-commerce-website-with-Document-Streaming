@@ -61,7 +61,7 @@ services:
 
   mongo-express:
     image: mongo-express
-    restart: on-failure
+    restart: always
     ports:
       - "8081:8081"
     environment:
