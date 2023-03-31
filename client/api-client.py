@@ -1,28 +1,16 @@
-
-import json
-<<<<<<< HEAD
 import linecache
+import json
 import requests
-# with open("./data/output.txt") as f:
-#     count = 0
-#     for line in f:
-#         try:
-#             json.loads(line)
-#             count+=1
-#         except json.JSONDecodeError:
-#             pass
+
+
 start = 1
 end = 100
-=======
 
-with open("./data/output.txt") as f:
-    count = 0
-    for line in f:
-        try:
-            json.loads(line)
-            count+=1
-        except json.JSONDecodeError:
-            pass
->>>>>>> parent of e79e96f (changes)
+i = start
 
-print(f"Json has: {count}")
+while i <= end:
+    line = linecache.getline("./data/output.txt", i)
+    json_data = json.loads(line)
+    response = requests.post('http://localhost:80/invoiceitem', json=json_data)
+    print(response.json())
+    i += 1
